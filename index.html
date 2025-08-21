@@ -383,7 +383,7 @@
                         </div>
                     </div>
                     
-                    <a href="https://wa.me/34644075065" target="_blank" class="bg-gray-900 hover:bg-gray-800 text-white px-4 py-2 rounded-lg transition-colors duration-200 font-medium whitespace-nowrap">
+                    <a href="https://wa.me/34631690524" target="_blank" class="bg-gray-900 hover:bg-gray-800 text-white px-4 py-2 rounded-lg transition-colors duration-200 font-medium whitespace-nowrap">
                         📲 WhatsApp
                     </a>
                 </div>
@@ -444,7 +444,7 @@
                 <a href="#casos" class="block text-gray-600 hover:text-gray-900 transition-colors py-3 px-4 rounded-lg hover:bg-gray-50 font-medium" data-translate="nav-cases">Casos de Uso</a>
                 <a href="#resultados" class="block text-gray-600 hover:text-gray-900 transition-colors py-3 px-4 rounded-lg hover:bg-gray-50 font-medium" data-translate="nav-results">Resultados</a>
                 <a href="#contacto" class="block text-gray-600 hover:text-gray-900 transition-colors py-3 px-4 rounded-lg hover:bg-gray-50 font-medium" data-translate="nav-contact">Contacto</a>
-                <a href="https://wa.me/34644075065" target="_blank" class="block bg-gray-900 hover:bg-gray-800 text-white px-4 py-3 rounded-lg transition-colors text-center font-medium">
+                <a href="https://wa.me/34631690524" target="_blank" class="block bg-gray-900 hover:bg-gray-800 text-white px-4 py-3 rounded-lg transition-colors text-center font-medium">
                     📲 WhatsApp
                 </a>
             </div>
@@ -494,7 +494,7 @@
                     <button onclick="startConsultation()" class="bg-white text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 shadow-block hover:shadow-lg transform hover:scale-105 text-sm sm:text-base pulse-animation" data-translate="hero-cta-primary">
                         🚀 Consulta Inicial - 50 USD
                     </button>
-                    <a href="https://wa.me/34644075065" target="_blank" class="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 text-center shadow-block hover:shadow-lg transform hover:scale-105 text-sm sm:text-base" data-translate="hero-cta-secondary">
+                    <a href="https://wa.me/34631690524" target="_blank" class="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 text-center shadow-block hover:shadow-lg transform hover:scale-105 text-sm sm:text-base" data-translate="hero-cta-secondary">
                         💬 WhatsApp Directo
                     </a>
                 </div>
@@ -685,13 +685,13 @@
                                 </div>
                             </a>
                             
-                            <a href="https://wa.me/34644075065" target="_blank" class="flex items-center space-x-4 hover:bg-white hover:bg-opacity-10 p-4 rounded-lg transition-colors">
+                            <a href="https://wa.me/34631690524" target="_blank" class="flex items-center space-x-4 hover:bg-white hover:bg-opacity-10 p-4 rounded-lg transition-colors">
                                 <div class="bg-green-500 rounded-full p-3">
                                     <span class="text-2xl">📲</span>
                                 </div>
                                 <div>
                                     <div class="font-semibold">WhatsApp</div>
-                                    <div class="opacity-90">+34 644 075 065</div>
+                                    <div class="opacity-90">+34 631 690 524</div>
                                 </div>
                             </a>
                             
@@ -1674,6 +1674,13 @@
             const button = this.querySelector('button[type="submit"]');
             const originalText = button.textContent;
             
+            // Get form data
+            const formData = new FormData(this);
+            const name = this.querySelector('input[type="text"]').value;
+            const email = this.querySelector('input[type="email"]').value;
+            const sector = this.querySelector('select').value;
+            const needs = this.querySelector('textarea').value;
+            
             button.textContent = '⏳ Procesando...';
             button.disabled = true;
             
@@ -1682,19 +1689,97 @@
                 button.className = 'w-full bg-green-500 text-white px-8 py-4 rounded-lg font-semibold';
                 
                 setTimeout(() => {
-                    // Get WhatsApp messages by language
+                    // Create email summary
+                    const emailSubject = encodeURIComponent('Consulta Inicial - Business Bots Solutions');
+                    const emailBody = encodeURIComponent(`Hola,
+
+Me interesa la Consulta Inicial de 50 USD para automatizar mi negocio.
+
+DATOS DEL CLIENTE:
+• Nombre: ${name}
+• Email: ${email}
+• Sector: ${sector}
+• Necesidades: ${needs}
+
+Espero su respuesta para coordinar la sesión de 2 horas.
+
+Saludos,
+${name}`);
+                    
+                    // Get WhatsApp messages by language with form data
                     const whatsappMessages = {
-                        'es': 'Hola! Me interesa la Consulta Inicial de 50 USD para automatizar mi negocio.',
-                        'en': 'Hello! I\'m interested in the Initial Consultation for 50 USD to automate my business.',
-                        'fr': 'Bonjour! Je suis intéressé par la Consultation Initiale de 50 USD pour automatiser mon entreprise.',
-                        'de': 'Hallo! Ich interessiere mich für die Erstberatung für 50 USD zur Automatisierung meines Unternehmens.',
-                        'it': 'Ciao! Sono interessato alla Consulenza Iniziale di 50 USD per automatizzare la mia azienda.',
-                        'ru': 'Привет! Меня интересует Первичная Консультация за 50 USD для автоматизации моего бизнеса.',
-                        'ar': 'مرحبا! أنا مهتم بالاستشارة الأولية مقابل 50 دولار لأتمتة عملي.'
+                        'es': `Hola! Me interesa la Consulta Inicial de 50 USD.
+
+DATOS:
+• Nombre: ${name}
+• Email: ${email}
+• Sector: ${sector}
+• Necesidades: ${needs}
+
+¿Podemos agendar la sesión de 2 horas?`,
+                        'en': `Hello! I'm interested in the Initial Consultation for 50 USD.
+
+DATA:
+• Name: ${name}
+• Email: ${email}
+• Sector: ${sector}
+• Needs: ${needs}
+
+Can we schedule the 2-hour session?`,
+                        'fr': `Bonjour! Je suis intéressé par la Consultation Initiale de 50 USD.
+
+DONNÉES:
+• Nom: ${name}
+• Email: ${email}
+• Secteur: ${sector}
+• Besoins: ${needs}
+
+Pouvons-nous programmer la session de 2 heures?`,
+                        'de': `Hallo! Ich interessiere mich für die Erstberatung für 50 USD.
+
+DATEN:
+• Name: ${name}
+• Email: ${email}
+• Sektor: ${sector}
+• Bedürfnisse: ${needs}
+
+Können wir die 2-stündige Sitzung vereinbaren?`,
+                        'it': `Ciao! Sono interessato alla Consulenza Iniziale di 50 USD.
+
+DATI:
+• Nome: ${name}
+• Email: ${email}
+• Settore: ${sector}
+• Esigenze: ${needs}
+
+Possiamo programmare la sessione di 2 ore?`,
+                        'ru': `Привет! Меня интересует Первичная Консультация за 50 USD.
+
+ДАННЫЕ:
+• Имя: ${name}
+• Email: ${email}
+• Сектор: ${sector}
+• Потребности: ${needs}
+
+Можем ли мы запланировать 2-часовую сессию?`,
+                        'ar': `مرحبا! أنا مهتم بالاستشارة الأولية مقابل 50 دولار.
+
+البيانات:
+• الاسم: ${name}
+• البريد الإلكتروني: ${email}
+• القطاع: ${sector}
+• الاحتياجات: ${needs}
+
+هل يمكننا جدولة الجلسة لمدة ساعتين؟`
                     };
                     
-                    const message = whatsappMessages[currentLang] || whatsappMessages['es'];
-                    window.open(`https://wa.me/34644075065?text=${encodeURIComponent(message)}`, '_blank');
+                    const whatsappMessage = whatsappMessages[currentLang] || whatsappMessages['es'];
+                    
+                    // Open both email and WhatsApp
+                    window.open(`mailto:businessbots.info@gmail.com?subject=${emailSubject}&body=${emailBody}`, '_blank');
+                    setTimeout(() => {
+                        window.open(`https://wa.me/34631690524?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
+                    }, 500);
                 }, 1500);
             }, 2000);
         });
@@ -1712,7 +1797,7 @@
             };
             
             const message = whatsappMessages[currentLang] || whatsappMessages['es'];
-            window.open(`https://wa.me/34644075065?text=${encodeURIComponent(message)}`, '_blank');
+            window.open(`https://wa.me/34631690524?text=${encodeURIComponent(message)}`, '_blank');
         }
 
         // Make function globally available
@@ -1840,5 +1925,5 @@
             });
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'972cf08d3222026b',t:'MTc1NTgwODc2NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'972d1272e21f2fab',t:'MTc1NTgxMDE1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
