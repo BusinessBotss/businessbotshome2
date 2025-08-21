@@ -1,0 +1,1844 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Bots Solutions - Automatización Inteligente & IA Conversacional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', 'Noto Sans', 'Noto Sans Arabic', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+        }
+        
+        .gradient-primary {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        }
+        
+        .gradient-secondary {
+            background: linear-gradient(135deg, #2d2d2d 0%, #404040 100%);
+        }
+        
+        .gradient-accent {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+            border-color: #d1d5db;
+        }
+        
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg); 
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            }
+            50% { 
+                transform: translateY(-20px) rotate(1deg); 
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            }
+        }
+        
+        .pulse-animation {
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { 
+                opacity: 1; 
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
+            }
+            50% { 
+                opacity: 0.8; 
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+            }
+        }
+        
+        .rocket-animation {
+            animation: rocket-bounce 4s ease-in-out infinite;
+        }
+        
+        @keyframes rocket-bounce {
+            0%, 100% { 
+                transform: translateY(0px) rotate(-2deg); 
+                filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+            }
+            25% { 
+                transform: translateY(-5px) rotate(1deg); 
+                filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.15));
+            }
+            50% { 
+                transform: translateY(-12px) rotate(-1deg); 
+                filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.2));
+            }
+            75% { 
+                transform: translateY(-5px) rotate(1deg); 
+                filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.15));
+            }
+        }
+        
+        .service-icon {
+            background: linear-gradient(135deg, #1a1a1a 0%, #404040 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+            transition: all 0.3s ease;
+        }
+        
+        .service-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+        }
+        
+        .shadow-block {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .shadow-block:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-slide-in {
+            animation: slideIn 1s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes slideIn {
+            from { 
+                opacity: 0; 
+                transform: translateX(-50px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0);
+            }
+        }
+        
+        .language-selector {
+            position: relative;
+        }
+        
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            min-width: 200px;
+            z-index: 9999;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            margin-top: 8px;
+        }
+        
+
+        
+        .language-dropdown.show {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #374151;
+            font-weight: 500;
+        }
+        
+        .language-option:hover {
+            background-color: #f3f4f6;
+            transform: translateX(4px);
+        }
+        
+        .language-option:first-child {
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .language-option:last-child {
+            border-radius: 0 0 12px 12px;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Performance optimizations */
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Touch improvements for mobile */
+        @media (hover: none) and (pointer: coarse) {
+            .card-hover:hover {
+                transform: none;
+            }
+            
+            .card-hover:active {
+                transform: translateY(-4px) scale(1.01);
+            }
+        }
+        
+        /* Improved focus states */
+        button:focus,
+        a:focus,
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        
+        /* Loading states */
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* Intersection observer animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Improved mobile navigation */
+        #mobile-menu {
+            display: none;
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        #mobile-menu.show {
+            display: block;
+            opacity: 1;
+        }
+        
+        /* Parallax effect for hero */
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        @media (max-width: 768px) {
+            .parallax-bg {
+                background-attachment: scroll;
+            }
+        }
+        
+        .hidden-lang {
+            display: none;
+        }
+        
+        /* RTL Support for Arabic */
+        [dir="rtl"] {
+            text-align: right;
+        }
+        
+        [dir="rtl"] .flex {
+            flex-direction: row-reverse;
+        }
+        
+        [dir="rtl"] .space-x-2 > * + * {
+            margin-right: 0.5rem;
+            margin-left: 0;
+        }
+        
+        [dir="rtl"] .space-x-3 > * + * {
+            margin-right: 0.75rem;
+            margin-left: 0;
+        }
+        
+        [dir="rtl"] .space-x-4 > * + * {
+            margin-right: 1rem;
+            margin-left: 0;
+        }
+        
+        [dir="rtl"] .space-x-8 > * + * {
+            margin-right: 2rem;
+            margin-left: 0;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+    <!-- Navigation -->
+    <nav class="bg-white bg-opacity-95 backdrop-blur-sm shadow-lg fixed w-full z-50 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="text-2xl font-bold gradient-primary bg-clip-text text-transparent">🤖 Business Bots</span>
+                    </div>
+                </div>
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center space-x-4 xl:space-x-6">
+                    <a href="#servicios" class="text-gray-600 hover:text-gray-900 transition-colors duration-200 font-medium px-3 py-2 rounded-lg hover:bg-gray-50" data-translate="nav-services">Servicios</a>
+                    <a href="#casos" class="text-gray-600 hover:text-gray-900 transition-colors duration-200 font-medium px-3 py-2 rounded-lg hover:bg-gray-50" data-translate="nav-cases">Casos de Uso</a>
+                    <a href="#resultados" class="text-gray-600 hover:text-gray-900 transition-colors duration-200 font-medium px-3 py-2 rounded-lg hover:bg-gray-50" data-translate="nav-results">Resultados</a>
+                    <a href="#contacto" class="text-gray-600 hover:text-gray-900 transition-colors duration-200 font-medium px-3 py-2 rounded-lg hover:bg-gray-50" data-translate="nav-contact">Contacto</a>
+                    
+                    <!-- Language Selector -->
+                    <div class="language-selector relative">
+                        <button id="language-btn" class="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors duration-200 px-3 py-2 rounded-lg hover:bg-gray-50">
+                            <span id="current-flag" class="text-lg">🇪🇸</span>
+                            <span id="current-lang" class="font-medium text-sm">ES</span>
+                            <svg class="w-4 h-4 transition-transform duration-200" id="lang-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="language-dropdown" class="language-dropdown">
+                            <div class="language-option" data-lang="es" data-flag="🇪🇸">
+                                <span>🇪🇸</span>
+                                <span>Español</span>
+                            </div>
+                            <div class="language-option" data-lang="en" data-flag="🇬🇧">
+                                <span>🇬🇧</span>
+                                <span>English</span>
+                            </div>
+                            <div class="language-option" data-lang="fr" data-flag="🇫🇷">
+                                <span>🇫🇷</span>
+                                <span>Français</span>
+                            </div>
+                            <div class="language-option" data-lang="de" data-flag="🇩🇪">
+                                <span>🇩🇪</span>
+                                <span>Deutsch</span>
+                            </div>
+                            <div class="language-option" data-lang="it" data-flag="🇮🇹">
+                                <span>🇮🇹</span>
+                                <span>Italiano</span>
+                            </div>
+                            <div class="language-option" data-lang="ru" data-flag="🇷🇺">
+                                <span>🇷🇺</span>
+                                <span>Русский</span>
+                            </div>
+                            <div class="language-option" data-lang="ar" data-flag="🇸🇦">
+                                <span>🇸🇦</span>
+                                <span>العربية</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="https://wa.me/34644075065" target="_blank" class="bg-gray-900 hover:bg-gray-800 text-white px-4 py-2 rounded-lg transition-colors duration-200 font-medium whitespace-nowrap">
+                        📲 WhatsApp
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden flex items-center space-x-4">
+                    <!-- Mobile Language Selector -->
+                    <div class="language-selector">
+                        <button id="mobile-language-btn" class="flex items-center space-x-1 text-gray-600 hover:text-gray-900 transition-colors p-2">
+                            <span id="mobile-current-flag" class="text-lg">🇪🇸</span>
+                            <span id="mobile-current-lang" class="text-sm font-medium">ES</span>
+                        </button>
+                        <div id="mobile-language-dropdown" class="language-dropdown shadow-block">
+                            <div class="language-option" data-lang="es" data-flag="🇪🇸">
+                                <span>🇪🇸</span>
+                                <span>Español</span>
+                            </div>
+                            <div class="language-option" data-lang="en" data-flag="🇬🇧">
+                                <span>🇬🇧</span>
+                                <span>English</span>
+                            </div>
+                            <div class="language-option" data-lang="fr" data-flag="🇫🇷">
+                                <span>🇫🇷</span>
+                                <span>Français</span>
+                            </div>
+                            <div class="language-option" data-lang="de" data-flag="🇩🇪">
+                                <span>🇩🇪</span>
+                                <span>Deutsch</span>
+                            </div>
+                            <div class="language-option" data-lang="it" data-flag="🇮🇹">
+                                <span>🇮🇹</span>
+                                <span>Italiano</span>
+                            </div>
+                            <div class="language-option" data-lang="ru" data-flag="🇷🇺">
+                                <span>🇷🇺</span>
+                                <span>Русский</span>
+                            </div>
+                            <div class="language-option" data-lang="ar" data-flag="🇸🇦">
+                                <span>🇸🇦</span>
+                                <span>العربية</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900 transition-colors p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="lg:hidden bg-white border-t border-gray-200 shadow-lg">
+            <div class="px-4 py-6 space-y-4">
+                <a href="#servicios" class="block text-gray-600 hover:text-gray-900 transition-colors py-3 px-4 rounded-lg hover:bg-gray-50 font-medium" data-translate="nav-services">Servicios</a>
+                <a href="#casos" class="block text-gray-600 hover:text-gray-900 transition-colors py-3 px-4 rounded-lg hover:bg-gray-50 font-medium" data-translate="nav-cases">Casos de Uso</a>
+                <a href="#resultados" class="block text-gray-600 hover:text-gray-900 transition-colors py-3 px-4 rounded-lg hover:bg-gray-50 font-medium" data-translate="nav-results">Resultados</a>
+                <a href="#contacto" class="block text-gray-600 hover:text-gray-900 transition-colors py-3 px-4 rounded-lg hover:bg-gray-50 font-medium" data-translate="nav-contact">Contacto</a>
+                <a href="https://wa.me/34644075065" target="_blank" class="block bg-gray-900 hover:bg-gray-800 text-white px-4 py-3 rounded-lg transition-colors text-center font-medium">
+                    📲 WhatsApp
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-primary text-white pt-20 sm:pt-24 lg:pt-28 pb-12 sm:pb-16 lg:pb-20 shadow-block min-h-screen flex items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="text-center">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 sm:mb-8 leading-tight animate-fade-in" data-translate="hero-title">
+                    Automatización Inteligente para tu Negocio
+                </h1>
+                <p class="text-xl sm:text-2xl lg:text-3xl mb-8 sm:mb-12 opacity-90 max-w-4xl mx-auto animate-slide-in" data-translate="hero-subtitle">
+                    Especialistas en IA conversacional, flujos multicanal y digitalización estratégica. 
+                    Desde Palma de Mallorca para el mundo.
+                </p>
+                
+                <!-- Centered Stats Block -->
+                <div class="floating-animation mb-8 sm:mb-12">
+                    <div class="bg-white bg-opacity-10 rounded-2xl p-6 sm:p-8 lg:p-10 backdrop-blur-sm border border-white border-opacity-20 max-w-2xl mx-auto">
+                        <div class="text-center mb-6 sm:mb-8">
+                            <h3 class="text-2xl sm:text-3xl font-bold mb-2 sm:mb-4" data-translate="hero-stats-title">Resultados Comprobados</h3>
+                        </div>
+                        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                            <div class="text-center">
+                                <div class="text-3xl sm:text-4xl lg:text-5xl font-bold stats-counter mb-2">50+</div>
+                                <div class="text-sm sm:text-base opacity-80" data-translate="hero-stats-clients">Clientes Activos</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl sm:text-4xl lg:text-5xl font-bold stats-counter mb-2">70%</div>
+                                <div class="text-sm sm:text-base opacity-80" data-translate="hero-stats-reduction">Reducción Tareas</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl sm:text-4xl lg:text-5xl font-bold stats-counter mb-2">&lt;5min</div>
+                                <div class="text-sm sm:text-base opacity-80" data-translate="hero-stats-response">Tiempo Respuesta</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl sm:text-4xl lg:text-5xl font-bold stats-counter mb-2">90%+</div>
+                                <div class="text-sm sm:text-base opacity-80" data-translate="hero-stats-satisfaction">Satisfacción</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 max-w-lg mx-auto">
+                    <button onclick="startConsultation()" class="bg-white text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 shadow-block hover:shadow-lg transform hover:scale-105 text-sm sm:text-base pulse-animation" data-translate="hero-cta-primary">
+                        🚀 Consulta Inicial - 50 USD
+                    </button>
+                    <a href="https://wa.me/34644075065" target="_blank" class="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 text-center shadow-block hover:shadow-lg transform hover:scale-105 text-sm sm:text-base" data-translate="hero-cta-secondary">
+                        💬 WhatsApp Directo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4" data-translate="services-title">Nuestros Servicios</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-translate="services-subtitle">
+                    Soluciones completas de automatización que transforman la manera en que tu negocio se comunica con sus clientes
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
+                <!-- Consultoría Estratégica -->
+                <div class="card-hover rounded-xl shadow-lg p-8 animate-fade-in">
+                    <div class="service-icon text-4xl mb-4">🎯</div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900" data-translate="service1-title">Consultoría Estratégica</h3>
+                    <p class="text-gray-600 mb-6" data-translate="service1-desc">Fase 0 - Diagnóstico profundo de tu negocio y propuesta personalizada en 2 horas.</p>
+                    <div class="text-2xl font-bold text-gray-900 mb-4">50 USD</div>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li data-translate="service1-feature1">✓ Análisis de procesos actuales</li>
+                        <li data-translate="service1-feature2">✓ Identificación de oportunidades</li>
+                        <li data-translate="service1-feature3">✓ Roadmap personalizado</li>
+                        <li data-translate="service1-feature4">✓ Propuesta técnica detallada</li>
+                    </ul>
+                </div>
+
+                <!-- Automatización Multicanal -->
+                <div class="card-hover rounded-xl shadow-lg p-8 animate-fade-in">
+                    <div class="service-icon text-4xl mb-4">🔄</div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900" data-translate="service2-title">Automatización Multicanal</h3>
+                    <p class="text-gray-600 mb-6" data-translate="service2-desc">WhatsApp, Email, Instagram, Web, Telegram y más canales integrados.</p>
+                    <div class="text-lg font-semibold text-gray-900 mb-4" data-translate="service2-price">Desde 299 USD</div>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li data-translate="service2-feature1">✓ WhatsApp Business API</li>
+                        <li data-translate="service2-feature2">✓ Chatbots inteligentes</li>
+                        <li data-translate="service2-feature3">✓ CRM integrado</li>
+                        <li data-translate="service2-feature4">✓ Flujos personalizados</li>
+                    </ul>
+                </div>
+
+                <!-- Soluciones NFC -->
+                <div class="card-hover rounded-xl shadow-lg p-8 animate-fade-in">
+                    <div class="service-icon text-4xl mb-4">📱</div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900" data-translate="service3-title">Soluciones NFC</h3>
+                    <p class="text-gray-600 mb-6" data-translate="service3-desc">Tarjetas, stickers y accesos físicos para eventos y hostelería.</p>
+                    <div class="text-lg font-semibold text-gray-900 mb-4" data-translate="service3-price">Desde 99 USD</div>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li data-translate="service3-feature1">✓ Tarjetas NFC personalizadas</li>
+                        <li data-translate="service3-feature2">✓ Códigos QR dinámicos</li>
+                        <li data-translate="service3-feature3">✓ Check-in automático</li>
+                        <li data-translate="service3-feature4">✓ Menús digitales</li>
+                    </ul>
+                </div>
+
+                <!-- Dashboards Ejecutivos -->
+                <div class="card-hover rounded-xl shadow-lg p-8 animate-fade-in">
+                    <div class="service-icon text-4xl mb-4">📊</div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900" data-translate="service4-title">Dashboards Ejecutivos</h3>
+                    <p class="text-gray-600 mb-6" data-translate="service4-desc">Analytics en tiempo real y KPIs personalizados para tu negocio.</p>
+                    <div class="text-lg font-semibold text-gray-900 mb-4" data-translate="service4-price">Desde 199 USD</div>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li data-translate="service4-feature1">✓ Métricas en tiempo real</li>
+                        <li data-translate="service4-feature2">✓ Reportes automáticos</li>
+                        <li data-translate="service4-feature3">✓ Alertas inteligentes</li>
+                        <li data-translate="service4-feature4">✓ Integración con CRM</li>
+                    </ul>
+                </div>
+
+                <!-- Soporte 24h -->
+                <div class="card-hover rounded-xl shadow-lg p-8 animate-fade-in">
+                    <div class="service-icon text-4xl mb-4">🛠️</div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900" data-translate="service5-title">Soporte Técnico</h3>
+                    <p class="text-gray-600 mb-6" data-translate="service5-desc">Soporte técnico inmediato y formación continua para tu equipo.</p>
+                    <div class="text-lg font-semibold text-gray-900 mb-4" data-translate="service5-price">Incluido</div>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li data-translate="service5-feature1">✓ Respuesta &lt;24h</li>
+                        <li data-translate="service5-feature2">✓ Formación del equipo</li>
+                        <li data-translate="service5-feature3">✓ Manuales detallados</li>
+                        <li data-translate="service5-feature4">✓ Actualizaciones gratuitas</li>
+                    </ul>
+                </div>
+
+                <!-- Business Bots PRO -->
+                <div class="card-hover gradient-secondary text-white rounded-xl shadow-lg p-8 relative overflow-hidden animate-fade-in">
+                    <div class="absolute top-0 right-0 bg-gray-900 text-white px-3 py-1 rounded-bl-lg text-xs font-bold pulse-animation" data-translate="service6-badge">
+                        PRÓXIMAMENTE
+                    </div>
+                    <div class="text-4xl mb-4 rocket-animation">🚀</div>
+                    <h3 class="text-xl font-bold mb-4" data-translate="service6-title">Business Bots PRO</h3>
+                    <p class="mb-6 opacity-90" data-translate="service6-desc">Lanzamiento Q4 2025 - La solución enterprise más avanzada del mercado.</p>
+                    <div class="text-2xl font-bold mb-4 text-white" data-translate="service6-price">Enterprise</div>
+                    <ul class="text-sm space-y-3 opacity-90">
+                        <li class="flex items-center space-x-2">
+                            <span class="text-gray-200">✓</span>
+                            <span data-translate="service6-feature1">IA Avanzada con Machine Learning</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="text-gray-200">✓</span>
+                            <span data-translate="service6-feature2">Integraciones ilimitadas (500+ APIs)</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="text-gray-200">✓</span>
+                            <span data-translate="service6-feature3">Soporte prioritario 24/7</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="text-gray-200">✓</span>
+                            <span data-translate="service6-feature4">Personalización total white-label</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="text-gray-200">✓</span>
+                            <span data-translate="service6-feature5">Analytics predictivos avanzados</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="text-gray-200">✓</span>
+                            <span data-translate="service6-feature6">Multi-tenant architecture</span>
+                        </li>
+                    </ul>
+                    <div class="mt-6 p-3 bg-white bg-opacity-20 rounded-lg backdrop-blur-sm shadow-block">
+                        <div class="text-xs font-semibold mb-1" data-translate="service6-waitlist-title">Lista de Espera Abierta</div>
+                        <div class="text-sm opacity-90" data-translate="service6-waitlist-desc">Sé el primero en acceder con descuento especial</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="py-12 sm:py-16 lg:py-20 gradient-primary text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6" data-translate="contact-title">¿Listo para Automatizar tu Negocio?</h2>
+                <p class="text-lg sm:text-xl lg:text-2xl opacity-90 max-w-3xl mx-auto" data-translate="contact-subtitle">Comienza con nuestra Consulta Inicial de 50 USD</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16">
+                <!-- Contact Form -->
+                <div class="bg-white bg-opacity-10 rounded-xl p-8 backdrop-blur-sm border border-white border-opacity-20">
+                    <h3 class="text-2xl font-bold mb-6" data-translate="contact-form-title">Solicita tu Consulta Inicial</h3>
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2" data-translate="contact-form-name">Nombre Completo</label>
+                            <input type="text" required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50" data-translate-placeholder="contact-form-name-placeholder" placeholder="Tu nombre">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2" data-translate="contact-form-email">Email</label>
+                            <input type="email" required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50" data-translate-placeholder="contact-form-email-placeholder" placeholder="tu@email.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2" data-translate="contact-form-sector">Sector de tu Negocio</label>
+                            <select required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50">
+                                <option value="" data-translate="contact-form-sector-placeholder">Selecciona tu sector</option>
+                                <option value="hosteleria" data-translate="contact-form-sector-hospitality">Hostelería</option>
+                                <option value="ecommerce" data-translate="contact-form-sector-ecommerce">E-commerce</option>
+                                <option value="educacion" data-translate="contact-form-sector-education">Educación</option>
+                                <option value="inmobiliario" data-translate="contact-form-sector-realestate">Inmobiliario</option>
+                                <option value="servicios" data-translate="contact-form-sector-services">Servicios Profesionales</option>
+                                <option value="otro" data-translate="contact-form-sector-other">Otro</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2" data-translate="contact-form-needs">¿Qué quieres automatizar?</label>
+                            <textarea required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50" rows="4" data-translate-placeholder="contact-form-needs-placeholder" placeholder="Describe brevemente tus necesidades..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors" data-translate="contact-form-submit">
+                            🚀 Solicitar Consulta - 50 USD
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6" data-translate="contact-info-title">Contacto Directo</h3>
+                        <div class="space-y-4">
+                            <a href="mailto:businessbots.info@gmail.com" class="flex items-center space-x-4 hover:bg-white hover:bg-opacity-10 p-4 rounded-lg transition-colors">
+                                <div class="bg-white bg-opacity-20 rounded-full p-3">
+                                    <span class="text-2xl">📩</span>
+                                </div>
+                                <div>
+                                    <div class="font-semibold" data-translate="contact-info-email">Email</div>
+                                    <div class="opacity-90">businessbots.info@gmail.com</div>
+                                </div>
+                            </a>
+                            
+                            <a href="https://wa.me/34644075065" target="_blank" class="flex items-center space-x-4 hover:bg-white hover:bg-opacity-10 p-4 rounded-lg transition-colors">
+                                <div class="bg-green-500 rounded-full p-3">
+                                    <span class="text-2xl">📲</span>
+                                </div>
+                                <div>
+                                    <div class="font-semibold">WhatsApp</div>
+                                    <div class="opacity-90">+34 644 075 065</div>
+                                </div>
+                            </a>
+                            
+                            <div class="flex items-center space-x-4 p-4">
+                                <div class="bg-white bg-opacity-20 rounded-full p-3">
+                                    <span class="text-2xl">📍</span>
+                                </div>
+                                <div>
+                                    <div class="font-semibold" data-translate="contact-info-location">Ubicación</div>
+                                    <div class="opacity-90" data-translate="contact-info-location-value">Palma de Mallorca, España</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="text-2xl font-bold mb-4">🤖 Business Bots Solutions</div>
+                    <p class="text-gray-400 mb-4" data-translate="footer-desc">Automatización inteligente y IA conversacional desde Palma de Mallorca.</p>
+                    <p class="text-sm text-gray-500" data-translate="footer-legal">Fundada en 2025 • RGPD Compliant</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4" data-translate="footer-services-title">Servicios</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li data-translate="footer-service1">Consultoría Estratégica</li>
+                        <li data-translate="footer-service2">Automatización Multicanal</li>
+                        <li data-translate="footer-service3">Soluciones NFC</li>
+                        <li data-translate="footer-service4">Dashboards Ejecutivos</li>
+                        <li data-translate="footer-service5">Soporte 24h</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4" data-translate="footer-sectors-title">Sectores</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li data-translate="footer-sector1">Hostelería</li>
+                        <li data-translate="footer-sector2">E-commerce</li>
+                        <li data-translate="footer-sector3">Educación</li>
+                        <li data-translate="footer-sector4">Inmobiliario</li>
+                        <li data-translate="footer-sector5">Servicios Profesionales</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p data-translate="footer-copyright">&copy; 2025 Business Bots Solutions. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Translations object
+        const translations = {
+            es: {
+                'nav-services': 'Servicios',
+                'nav-cases': 'Casos de Uso',
+                'nav-results': 'Resultados',
+                'nav-contact': 'Contacto',
+                'hero-title': 'Automatización Inteligente para tu Negocio',
+                'hero-subtitle': 'Especialistas en IA conversacional, flujos multicanal y digitalización estratégica. Desde Palma de Mallorca para el mundo.',
+                'hero-cta-primary': '🚀 Consulta Inicial - 50 USD',
+                'hero-cta-secondary': '💬 WhatsApp Directo',
+                'hero-stats-title': 'Resultados Comprobados',
+                'hero-stats-clients': 'Clientes Activos',
+                'hero-stats-reduction': 'Reducción Tareas',
+                'hero-stats-response': 'Tiempo Respuesta',
+                'hero-stats-satisfaction': 'Satisfacción',
+                'services-title': 'Nuestros Servicios',
+                'services-subtitle': 'Soluciones completas de automatización que transforman la manera en que tu negocio se comunica con sus clientes',
+                'service1-title': 'Consultoría Estratégica',
+                'service1-desc': 'Fase 0 - Diagnóstico profundo de tu negocio y propuesta personalizada en 2 horas.',
+                'service1-feature1': '✓ Análisis de procesos actuales',
+                'service1-feature2': '✓ Identificación de oportunidades',
+                'service1-feature3': '✓ Roadmap personalizado',
+                'service1-feature4': '✓ Propuesta técnica detallada',
+                'service2-title': 'Automatización Multicanal',
+                'service2-desc': 'WhatsApp, Email, Instagram, Web, Telegram y más canales integrados.',
+                'service2-price': 'Desde 299 USD',
+                'service2-feature1': '✓ WhatsApp Business API',
+                'service2-feature2': '✓ Chatbots inteligentes',
+                'service2-feature3': '✓ CRM integrado',
+                'service2-feature4': '✓ Flujos personalizados',
+                'service3-title': 'Soluciones NFC',
+                'service3-desc': 'Tarjetas, stickers y accesos físicos para eventos y hostelería.',
+                'service3-price': 'Desde 99 USD',
+                'service3-feature1': '✓ Tarjetas NFC personalizadas',
+                'service3-feature2': '✓ Códigos QR dinámicos',
+                'service3-feature3': '✓ Check-in automático',
+                'service3-feature4': '✓ Menús digitales',
+                'service4-title': 'Dashboards Ejecutivos',
+                'service4-desc': 'Analytics en tiempo real y KPIs personalizados para tu negocio.',
+                'service4-price': 'Desde 199 USD',
+                'service4-feature1': '✓ Métricas en tiempo real',
+                'service4-feature2': '✓ Reportes automáticos',
+                'service4-feature3': '✓ Alertas inteligentes',
+                'service4-feature4': '✓ Integración con CRM',
+                'service5-title': 'Soporte Técnico',
+                'service5-desc': 'Soporte técnico inmediato y formación continua para tu equipo.',
+                'service5-price': 'Incluido',
+                'service5-feature1': '✓ Respuesta <24h',
+                'service5-feature2': '✓ Formación del equipo',
+                'service5-feature3': '✓ Manuales detallados',
+                'service5-feature4': '✓ Actualizaciones gratuitas',
+                'service6-badge': 'PRÓXIMAMENTE',
+                'service6-title': 'Business Bots PRO',
+                'service6-desc': 'Lanzamiento Q4 2025 - La solución enterprise más avanzada del mercado.',
+                'service6-price': 'Enterprise',
+                'service6-feature1': 'IA Avanzada con Machine Learning',
+                'service6-feature2': 'Integraciones ilimitadas (500+ APIs)',
+                'service6-feature3': 'Soporte prioritario 24/7',
+                'service6-feature4': 'Personalización total white-label',
+                'service6-feature5': 'Analytics predictivos avanzados',
+                'service6-feature6': 'Multi-tenant architecture',
+                'service6-waitlist-title': 'Lista de Espera Abierta',
+                'service6-waitlist-desc': 'Sé el primero en acceder con descuento especial',
+                'contact-title': '¿Listo para Automatizar tu Negocio?',
+                'contact-subtitle': 'Comienza con nuestra Consulta Inicial de 50 USD',
+                'contact-form-title': 'Solicita tu Consulta Inicial',
+                'contact-form-name': 'Nombre Completo',
+                'contact-form-name-placeholder': 'Tu nombre',
+                'contact-form-email': 'Email',
+                'contact-form-email-placeholder': 'tu@email.com',
+                'contact-form-sector': 'Sector de tu Negocio',
+                'contact-form-sector-placeholder': 'Selecciona tu sector',
+                'contact-form-sector-hospitality': 'Hostelería',
+                'contact-form-sector-ecommerce': 'E-commerce',
+                'contact-form-sector-education': 'Educación',
+                'contact-form-sector-realestate': 'Inmobiliario',
+                'contact-form-sector-services': 'Servicios Profesionales',
+                'contact-form-sector-other': 'Otro',
+                'contact-form-needs': '¿Qué quieres automatizar?',
+                'contact-form-needs-placeholder': 'Describe brevemente tus necesidades...',
+                'contact-form-submit': '🚀 Solicitar Consulta - 50 USD',
+                'contact-info-title': 'Contacto Directo',
+                'contact-info-email': 'Email',
+                'contact-info-location': 'Ubicación',
+                'contact-info-location-value': 'Palma de Mallorca, España',
+                'footer-desc': 'Automatización inteligente y IA conversacional desde Palma de Mallorca.',
+                'footer-legal': 'Fundada en 2025 • RGPD Compliant',
+                'footer-services-title': 'Servicios',
+                'footer-service1': 'Consultoría Estratégica',
+                'footer-service2': 'Automatización Multicanal',
+                'footer-service3': 'Soluciones NFC',
+                'footer-service4': 'Dashboards Ejecutivos',
+                'footer-service5': 'Soporte 24h',
+                'footer-sectors-title': 'Sectores',
+                'footer-sector1': 'Hostelería',
+                'footer-sector2': 'E-commerce',
+                'footer-sector3': 'Educación',
+                'footer-sector4': 'Inmobiliario',
+                'footer-sector5': 'Servicios Profesionales',
+                'footer-copyright': '© 2025 Business Bots Solutions. Todos los derechos reservados.'
+            },
+            en: {
+                'nav-services': 'Services',
+                'nav-cases': 'Use Cases',
+                'nav-results': 'Results',
+                'nav-contact': 'Contact',
+                'hero-title': 'Intelligent Automation for Your Business',
+                'hero-subtitle': 'Specialists in conversational AI, multichannel flows and strategic digitalization. From Palma de Mallorca to the world.',
+                'hero-cta-primary': '🚀 Initial Consultation - 50 USD',
+                'hero-cta-secondary': '💬 Direct WhatsApp',
+                'hero-stats-title': 'Proven Results',
+                'hero-stats-clients': 'Active Clients',
+                'hero-stats-reduction': 'Task Reduction',
+                'hero-stats-response': 'Response Time',
+                'hero-stats-satisfaction': 'Satisfaction',
+                'services-title': 'Our Services',
+                'services-subtitle': 'Complete automation solutions that transform the way your business communicates with its customers',
+                'service1-title': 'Strategic Consulting',
+                'service1-desc': 'Phase 0 - Deep diagnosis of your business and personalized proposal in 2 hours.',
+                'service1-feature1': '✓ Current process analysis',
+                'service1-feature2': '✓ Opportunity identification',
+                'service1-feature3': '✓ Personalized roadmap',
+                'service1-feature4': '✓ Detailed technical proposal',
+                'service2-title': 'Multichannel Automation',
+                'service2-desc': 'WhatsApp, Email, Instagram, Web, Telegram and more integrated channels.',
+                'service2-price': 'From 299 USD',
+                'service2-feature1': '✓ WhatsApp Business API',
+                'service2-feature2': '✓ Intelligent chatbots',
+                'service2-feature3': '✓ Integrated CRM',
+                'service2-feature4': '✓ Custom flows',
+                'service3-title': 'NFC Solutions',
+                'service3-desc': 'Cards, stickers and physical access for events and hospitality.',
+                'service3-price': 'From 99 USD',
+                'service3-feature1': '✓ Custom NFC cards',
+                'service3-feature2': '✓ Dynamic QR codes',
+                'service3-feature3': '✓ Automatic check-in',
+                'service3-feature4': '✓ Digital menus',
+                'service4-title': 'Executive Dashboards',
+                'service4-desc': 'Real-time analytics and personalized KPIs for your business.',
+                'service4-price': 'From 199 USD',
+                'service4-feature1': '✓ Real-time metrics',
+                'service4-feature2': '✓ Automatic reports',
+                'service4-feature3': '✓ Smart alerts',
+                'service4-feature4': '✓ CRM integration',
+                'service5-title': 'Technical Support',
+                'service5-desc': 'Immediate technical support and continuous training for your team.',
+                'service5-price': 'Included',
+                'service5-feature1': '✓ Response <24h',
+                'service5-feature2': '✓ Team training',
+                'service5-feature3': '✓ Detailed manuals',
+                'service5-feature4': '✓ Free updates',
+                'service6-badge': 'COMING SOON',
+                'service6-title': 'Business Bots PRO',
+                'service6-desc': 'Q4 2025 Launch - The most advanced enterprise solution on the market.',
+                'service6-price': 'Enterprise',
+                'service6-feature1': 'Advanced AI with Machine Learning',
+                'service6-feature2': 'Unlimited integrations (500+ APIs)',
+                'service6-feature3': 'Priority 24/7 support',
+                'service6-feature4': 'Total white-label customization',
+                'service6-feature5': 'Advanced predictive analytics',
+                'service6-feature6': 'Multi-tenant architecture',
+                'service6-waitlist-title': 'Waitlist Open',
+                'service6-waitlist-desc': 'Be the first to access with special discount',
+                'contact-title': 'Ready to Automate Your Business?',
+                'contact-subtitle': 'Start with our Initial Consultation for 50 USD',
+                'contact-form-title': 'Request Your Initial Consultation',
+                'contact-form-name': 'Full Name',
+                'contact-form-name-placeholder': 'Your name',
+                'contact-form-email': 'Email',
+                'contact-form-email-placeholder': 'your@email.com',
+                'contact-form-sector': 'Your Business Sector',
+                'contact-form-sector-placeholder': 'Select your sector',
+                'contact-form-sector-hospitality': 'Hospitality',
+                'contact-form-sector-ecommerce': 'E-commerce',
+                'contact-form-sector-education': 'Education',
+                'contact-form-sector-realestate': 'Real Estate',
+                'contact-form-sector-services': 'Professional Services',
+                'contact-form-sector-other': 'Other',
+                'contact-form-needs': 'What do you want to automate?',
+                'contact-form-needs-placeholder': 'Briefly describe your needs...',
+                'contact-form-submit': '🚀 Request Consultation - 50 USD',
+                'contact-info-title': 'Direct Contact',
+                'contact-info-email': 'Email',
+                'contact-info-location': 'Location',
+                'contact-info-location-value': 'Palma de Mallorca, Spain',
+                'footer-desc': 'Intelligent automation and conversational AI from Palma de Mallorca.',
+                'footer-legal': 'Founded in 2025 • GDPR Compliant',
+                'footer-services-title': 'Services',
+                'footer-service1': 'Strategic Consulting',
+                'footer-service2': 'Multichannel Automation',
+                'footer-service3': 'NFC Solutions',
+                'footer-service4': 'Executive Dashboards',
+                'footer-service5': '24h Support',
+                'footer-sectors-title': 'Sectors',
+                'footer-sector1': 'Hospitality',
+                'footer-sector2': 'E-commerce',
+                'footer-sector3': 'Education',
+                'footer-sector4': 'Real Estate',
+                'footer-sector5': 'Professional Services',
+                'footer-copyright': '© 2025 Business Bots Solutions. All rights reserved.'
+            },
+            fr: {
+                'nav-services': 'Services',
+                'nav-cases': 'Cas d\'Usage',
+                'nav-results': 'Résultats',
+                'nav-contact': 'Contact',
+                'hero-title': 'Automatisation Intelligente pour Votre Entreprise',
+                'hero-subtitle': 'Spécialistes en IA conversationnelle, flux multicanaux et digitalisation stratégique. De Palma de Majorque vers le monde.',
+                'hero-cta-primary': '🚀 Consultation Initiale - 50 USD',
+                'hero-cta-secondary': '💬 WhatsApp Direct',
+                'hero-stats-title': 'Résultats Prouvés',
+                'hero-stats-clients': 'Clients Actifs',
+                'hero-stats-reduction': 'Réduction Tâches',
+                'hero-stats-response': 'Temps Réponse',
+                'hero-stats-satisfaction': 'Satisfaction',
+                'services-title': 'Nos Services',
+                'services-subtitle': 'Solutions d\'automatisation complètes qui transforment la façon dont votre entreprise communique avec ses clients',
+                'service1-title': 'Conseil Stratégique',
+                'service1-desc': 'Phase 0 - Diagnostic approfondi de votre entreprise et proposition personnalisée en 2 heures.',
+                'service1-feature1': '✓ Analyse des processus actuels',
+                'service1-feature2': '✓ Identification des opportunités',
+                'service1-feature3': '✓ Feuille de route personnalisée',
+                'service1-feature4': '✓ Proposition technique détaillée',
+                'service2-title': 'Automatisation Multicanal',
+                'service2-desc': 'WhatsApp, Email, Instagram, Web, Telegram et plus de canaux intégrés.',
+                'service2-price': 'À partir de 299 USD',
+                'service2-feature1': '✓ API WhatsApp Business',
+                'service2-feature2': '✓ Chatbots intelligents',
+                'service2-feature3': '✓ CRM intégré',
+                'service2-feature4': '✓ Flux personnalisés',
+                'service3-title': 'Solutions NFC',
+                'service3-desc': 'Cartes, autocollants et accès physiques pour événements et hôtellerie.',
+                'service3-price': 'À partir de 99 USD',
+                'service3-feature1': '✓ Cartes NFC personnalisées',
+                'service3-feature2': '✓ Codes QR dynamiques',
+                'service3-feature3': '✓ Enregistrement automatique',
+                'service3-feature4': '✓ Menus numériques',
+                'service4-title': 'Tableaux de Bord Exécutifs',
+                'service4-desc': 'Analytics en temps réel et KPI personnalisés pour votre entreprise.',
+                'service4-price': 'À partir de 199 USD',
+                'service4-feature1': '✓ Métriques en temps réel',
+                'service4-feature2': '✓ Rapports automatiques',
+                'service4-feature3': '✓ Alertes intelligentes',
+                'service4-feature4': '✓ Intégration CRM',
+                'service5-title': 'Support Technique',
+                'service5-desc': 'Support technique immédiat et formation continue pour votre équipe.',
+                'service5-price': 'Inclus',
+                'service5-feature1': '✓ Réponse <24h',
+                'service5-feature2': '✓ Formation équipe',
+                'service5-feature3': '✓ Manuels détaillés',
+                'service5-feature4': '✓ Mises à jour gratuites',
+                'service6-badge': 'BIENTÔT',
+                'service6-title': 'Business Bots PRO',
+                'service6-desc': 'Lancement Q4 2025 - La solution enterprise la plus avancée du marché.',
+                'service6-price': 'Enterprise',
+                'service6-feature1': 'IA Avancée avec Machine Learning',
+                'service6-feature2': 'Intégrations illimitées (500+ APIs)',
+                'service6-feature3': 'Support prioritaire 24/7',
+                'service6-feature4': 'Personnalisation totale white-label',
+                'service6-feature5': 'Analytics prédictifs avancés',
+                'service6-feature6': 'Architecture multi-tenant',
+                'service6-waitlist-title': 'Liste d\'Attente Ouverte',
+                'service6-waitlist-desc': 'Soyez le premier à accéder avec remise spéciale',
+                'contact-title': 'Prêt à Automatiser Votre Entreprise?',
+                'contact-subtitle': 'Commencez avec notre Consultation Initiale de 50 USD',
+                'contact-form-title': 'Demandez Votre Consultation Initiale',
+                'contact-form-name': 'Nom Complet',
+                'contact-form-name-placeholder': 'Votre nom',
+                'contact-form-email': 'Email',
+                'contact-form-email-placeholder': 'votre@email.com',
+                'contact-form-sector': 'Secteur de Votre Entreprise',
+                'contact-form-sector-placeholder': 'Sélectionnez votre secteur',
+                'contact-form-sector-hospitality': 'Hôtellerie',
+                'contact-form-sector-ecommerce': 'E-commerce',
+                'contact-form-sector-education': 'Éducation',
+                'contact-form-sector-realestate': 'Immobilier',
+                'contact-form-sector-services': 'Services Professionnels',
+                'contact-form-sector-other': 'Autre',
+                'contact-form-needs': 'Que voulez-vous automatiser?',
+                'contact-form-needs-placeholder': 'Décrivez brièvement vos besoins...',
+                'contact-form-submit': '🚀 Demander Consultation - 50 USD',
+                'contact-info-title': 'Contact Direct',
+                'contact-info-email': 'Email',
+                'contact-info-location': 'Localisation',
+                'contact-info-location-value': 'Palma de Majorque, Espagne',
+                'footer-desc': 'Automatisation intelligente et IA conversationnelle depuis Palma de Majorque.',
+                'footer-legal': 'Fondée en 2025 • Conforme RGPD',
+                'footer-services-title': 'Services',
+                'footer-service1': 'Conseil Stratégique',
+                'footer-service2': 'Automatisation Multicanal',
+                'footer-service3': 'Solutions NFC',
+                'footer-service4': 'Tableaux de Bord Exécutifs',
+                'footer-service5': 'Support 24h',
+                'footer-sectors-title': 'Secteurs',
+                'footer-sector1': 'Hôtellerie',
+                'footer-sector2': 'E-commerce',
+                'footer-sector3': 'Éducation',
+                'footer-sector4': 'Immobilier',
+                'footer-sector5': 'Services Professionnels',
+                'footer-copyright': '© 2025 Business Bots Solutions. Tous droits réservés.'
+            },
+            de: {
+                'nav-services': 'Dienstleistungen',
+                'nav-cases': 'Anwendungsfälle',
+                'nav-results': 'Ergebnisse',
+                'nav-contact': 'Kontakt',
+                'hero-title': 'Intelligente Automatisierung für Ihr Unternehmen',
+                'hero-subtitle': 'Spezialisten für Conversational AI, Multichannel-Flows und strategische Digitalisierung. Von Palma de Mallorca in die Welt.',
+                'hero-cta-primary': '🚀 Erstberatung - 50 USD',
+                'hero-cta-secondary': '💬 Direkter WhatsApp',
+                'hero-stats-title': 'Bewährte Ergebnisse',
+                'hero-stats-clients': 'Aktive Kunden',
+                'hero-stats-reduction': 'Aufgabenreduktion',
+                'hero-stats-response': 'Antwortzeit',
+                'hero-stats-satisfaction': 'Zufriedenheit',
+                'services-title': 'Unsere Dienstleistungen',
+                'services-subtitle': 'Komplette Automatisierungslösungen, die die Art und Weise transformieren, wie Ihr Unternehmen mit seinen Kunden kommuniziert',
+                'service1-title': 'Strategische Beratung',
+                'service1-desc': 'Phase 0 - Tiefgreifende Diagnose Ihres Unternehmens und personalisierter Vorschlag in 2 Stunden.',
+                'service1-feature1': '✓ Analyse aktueller Prozesse',
+                'service1-feature2': '✓ Identifikation von Chancen',
+                'service1-feature3': '✓ Personalisierte Roadmap',
+                'service1-feature4': '✓ Detaillierter technischer Vorschlag',
+                'service2-title': 'Multichannel-Automatisierung',
+                'service2-desc': 'WhatsApp, Email, Instagram, Web, Telegram und weitere integrierte Kanäle.',
+                'service2-price': 'Ab 299 USD',
+                'service2-feature1': '✓ WhatsApp Business API',
+                'service2-feature2': '✓ Intelligente Chatbots',
+                'service2-feature3': '✓ Integriertes CRM',
+                'service2-feature4': '✓ Angepasste Flows',
+                'service3-title': 'NFC-Lösungen',
+                'service3-desc': 'Karten, Aufkleber und physischer Zugang für Events und Gastronomie.',
+                'service3-price': 'Ab 99 USD',
+                'service3-feature1': '✓ Personalisierte NFC-Karten',
+                'service3-feature2': '✓ Dynamische QR-Codes',
+                'service3-feature3': '✓ Automatischer Check-in',
+                'service3-feature4': '✓ Digitale Menüs',
+                'service4-title': 'Executive Dashboards',
+                'service4-desc': 'Echtzeit-Analytics und personalisierte KPIs für Ihr Unternehmen.',
+                'service4-price': 'Ab 199 USD',
+                'service4-feature1': '✓ Echtzeit-Metriken',
+                'service4-feature2': '✓ Automatische Berichte',
+                'service4-feature3': '✓ Intelligente Warnungen',
+                'service4-feature4': '✓ CRM-Integration',
+                'service5-title': 'Technischer Support',
+                'service5-desc': 'Sofortiger technischer Support und kontinuierliche Schulung für Ihr Team.',
+                'service5-price': 'Inbegriffen',
+                'service5-feature1': '✓ Antwort <24h',
+                'service5-feature2': '✓ Team-Schulung',
+                'service5-feature3': '✓ Detaillierte Handbücher',
+                'service5-feature4': '✓ Kostenlose Updates',
+                'service6-badge': 'DEMNÄCHST',
+                'service6-title': 'Business Bots PRO',
+                'service6-desc': 'Q4 2025 Launch - Die fortschrittlichste Enterprise-Lösung am Markt.',
+                'service6-price': 'Enterprise',
+                'service6-feature1': 'Erweiterte KI mit Machine Learning',
+                'service6-feature2': 'Unbegrenzte Integrationen (500+ APIs)',
+                'service6-feature3': 'Prioritärer 24/7 Support',
+                'service6-feature4': 'Vollständige White-Label-Anpassung',
+                'service6-feature5': 'Erweiterte prädiktive Analytics',
+                'service6-feature6': 'Multi-Tenant-Architektur',
+                'service6-waitlist-title': 'Warteliste Offen',
+                'service6-waitlist-desc': 'Seien Sie der Erste mit Sonderrabatt',
+                'contact-title': 'Bereit, Ihr Unternehmen zu Automatisieren?',
+                'contact-subtitle': 'Beginnen Sie mit unserer Erstberatung für 50 USD',
+                'contact-form-title': 'Fordern Sie Ihre Erstberatung an',
+                'contact-form-name': 'Vollständiger Name',
+                'contact-form-name-placeholder': 'Ihr Name',
+                'contact-form-email': 'Email',
+                'contact-form-email-placeholder': 'ihre@email.com',
+                'contact-form-sector': 'Ihr Unternehmenssektor',
+                'contact-form-sector-placeholder': 'Wählen Sie Ihren Sektor',
+                'contact-form-sector-hospitality': 'Gastronomie',
+                'contact-form-sector-ecommerce': 'E-Commerce',
+                'contact-form-sector-education': 'Bildung',
+                'contact-form-sector-realestate': 'Immobilien',
+                'contact-form-sector-services': 'Professionelle Dienstleistungen',
+                'contact-form-sector-other': 'Andere',
+                'contact-form-needs': 'Was möchten Sie automatisieren?',
+                'contact-form-needs-placeholder': 'Beschreiben Sie kurz Ihre Bedürfnisse...',
+                'contact-form-submit': '🚀 Beratung Anfordern - 50 USD',
+                'contact-info-title': 'Direkter Kontakt',
+                'contact-info-email': 'Email',
+                'contact-info-location': 'Standort',
+                'contact-info-location-value': 'Palma de Mallorca, Spanien',
+                'footer-desc': 'Intelligente Automatisierung und Conversational AI aus Palma de Mallorca.',
+                'footer-legal': 'Gegründet 2025 • DSGVO-konform',
+                'footer-services-title': 'Dienstleistungen',
+                'footer-service1': 'Strategische Beratung',
+                'footer-service2': 'Multichannel-Automatisierung',
+                'footer-service3': 'NFC-Lösungen',
+                'footer-service4': 'Executive Dashboards',
+                'footer-service5': '24h Support',
+                'footer-sectors-title': 'Sektoren',
+                'footer-sector1': 'Gastronomie',
+                'footer-sector2': 'E-Commerce',
+                'footer-sector3': 'Bildung',
+                'footer-sector4': 'Immobilien',
+                'footer-sector5': 'Professionelle Dienstleistungen',
+                'footer-copyright': '© 2025 Business Bots Solutions. Alle Rechte vorbehalten.'
+            },
+            it: {
+                'nav-services': 'Servizi',
+                'nav-cases': 'Casi d\'Uso',
+                'nav-results': 'Risultati',
+                'nav-contact': 'Contatto',
+                'hero-title': 'Automazione Intelligente per la Tua Azienda',
+                'hero-subtitle': 'Specialisti in IA conversazionale, flussi multicanale e digitalizzazione strategica. Da Palma di Maiorca al mondo.',
+                'hero-cta-primary': '🚀 Consulenza Iniziale - 50 USD',
+                'hero-cta-secondary': '💬 WhatsApp Diretto',
+                'hero-stats-title': 'Risultati Comprovati',
+                'hero-stats-clients': 'Clienti Attivi',
+                'hero-stats-reduction': 'Riduzione Compiti',
+                'hero-stats-response': 'Tempo Risposta',
+                'hero-stats-satisfaction': 'Soddisfazione',
+                'services-title': 'I Nostri Servizi',
+                'services-subtitle': 'Soluzioni di automazione complete che trasformano il modo in cui la tua azienda comunica con i suoi clienti',
+                'service1-title': 'Consulenza Strategica',
+                'service1-desc': 'Fase 0 - Diagnosi approfondita della tua azienda e proposta personalizzata in 2 ore.',
+                'service1-feature1': '✓ Analisi processi attuali',
+                'service1-feature2': '✓ Identificazione opportunità',
+                'service1-feature3': '✓ Roadmap personalizzata',
+                'service1-feature4': '✓ Proposta tecnica dettagliata',
+                'service2-title': 'Automazione Multicanale',
+                'service2-desc': 'WhatsApp, Email, Instagram, Web, Telegram e altri canali integrati.',
+                'service2-price': 'Da 299 USD',
+                'service2-feature1': '✓ API WhatsApp Business',
+                'service2-feature2': '✓ Chatbot intelligenti',
+                'service2-feature3': '✓ CRM integrato',
+                'service2-feature4': '✓ Flussi personalizzati',
+                'service3-title': 'Soluzioni NFC',
+                'service3-desc': 'Carte, adesivi e accessi fisici per eventi e ospitalità.',
+                'service3-price': 'Da 99 USD',
+                'service3-feature1': '✓ Carte NFC personalizzate',
+                'service3-feature2': '✓ Codici QR dinamici',
+                'service3-feature3': '✓ Check-in automatico',
+                'service3-feature4': '✓ Menu digitali',
+                'service4-title': 'Dashboard Esecutive',
+                'service4-desc': 'Analytics in tempo reale e KPI personalizzati per la tua azienda.',
+                'service4-price': 'Da 199 USD',
+                'service4-feature1': '✓ Metriche in tempo reale',
+                'service4-feature2': '✓ Report automatici',
+                'service4-feature3': '✓ Avvisi intelligenti',
+                'service4-feature4': '✓ Integrazione CRM',
+                'service5-title': 'Supporto Tecnico',
+                'service5-desc': 'Supporto tecnico immediato e formazione continua per il tuo team.',
+                'service5-price': 'Incluso',
+                'service5-feature1': '✓ Risposta <24h',
+                'service5-feature2': '✓ Formazione team',
+                'service5-feature3': '✓ Manuali dettagliati',
+                'service5-feature4': '✓ Aggiornamenti gratuiti',
+                'service6-badge': 'PROSSIMAMENTE',
+                'service6-title': 'Business Bots PRO',
+                'service6-desc': 'Lancio Q4 2025 - La soluzione enterprise più avanzata sul mercato.',
+                'service6-price': 'Enterprise',
+                'service6-feature1': 'IA Avanzata con Machine Learning',
+                'service6-feature2': 'Integrazioni illimitate (500+ API)',
+                'service6-feature3': 'Supporto prioritario 24/7',
+                'service6-feature4': 'Personalizzazione totale white-label',
+                'service6-feature5': 'Analytics predittivi avanzati',
+                'service6-feature6': 'Architettura multi-tenant',
+                'service6-waitlist-title': 'Lista d\'Attesa Aperta',
+                'service6-waitlist-desc': 'Sii il primo ad accedere con sconto speciale',
+                'contact-title': 'Pronto ad Automatizzare la Tua Azienda?',
+                'contact-subtitle': 'Inizia con la nostra Consulenza Iniziale di 50 USD',
+                'contact-form-title': 'Richiedi la Tua Consulenza Iniziale',
+                'contact-form-name': 'Nome Completo',
+                'contact-form-name-placeholder': 'Il tuo nome',
+                'contact-form-email': 'Email',
+                'contact-form-email-placeholder': 'tua@email.com',
+                'contact-form-sector': 'Settore della Tua Azienda',
+                'contact-form-sector-placeholder': 'Seleziona il tuo settore',
+                'contact-form-sector-hospitality': 'Ospitalità',
+                'contact-form-sector-ecommerce': 'E-commerce',
+                'contact-form-sector-education': 'Educazione',
+                'contact-form-sector-realestate': 'Immobiliare',
+                'contact-form-sector-services': 'Servizi Professionali',
+                'contact-form-sector-other': 'Altro',
+                'contact-form-needs': 'Cosa vuoi automatizzare?',
+                'contact-form-needs-placeholder': 'Descrivi brevemente le tue esigenze...',
+                'contact-form-submit': '🚀 Richiedi Consulenza - 50 USD',
+                'contact-info-title': 'Contatto Diretto',
+                'contact-info-email': 'Email',
+                'contact-info-location': 'Posizione',
+                'contact-info-location-value': 'Palma di Maiorca, Spagna',
+                'footer-desc': 'Automazione intelligente e IA conversazionale da Palma di Maiorca.',
+                'footer-legal': 'Fondata nel 2025 • Conforme GDPR',
+                'footer-services-title': 'Servizi',
+                'footer-service1': 'Consulenza Strategica',
+                'footer-service2': 'Automazione Multicanale',
+                'footer-service3': 'Soluzioni NFC',
+                'footer-service4': 'Dashboard Esecutive',
+                'footer-service5': 'Supporto 24h',
+                'footer-sectors-title': 'Settori',
+                'footer-sector1': 'Ospitalità',
+                'footer-sector2': 'E-commerce',
+                'footer-sector3': 'Educazione',
+                'footer-sector4': 'Immobiliare',
+                'footer-sector5': 'Servizi Professionali',
+                'footer-copyright': '© 2025 Business Bots Solutions. Tutti i diritti riservati.'
+            },
+            ru: {
+                'nav-services': 'Услуги',
+                'nav-cases': 'Кейсы',
+                'nav-results': 'Результаты',
+                'nav-contact': 'Контакты',
+                'hero-title': 'Интеллектуальная Автоматизация для Вашего Бизнеса',
+                'hero-subtitle': 'Специалисты по разговорному ИИ, многоканальным потокам и стратегической цифровизации. Из Пальма-де-Майорка в мир.',
+                'hero-cta-primary': '🚀 Первичная Консультация - 50 USD',
+                'hero-cta-secondary': '💬 Прямой WhatsApp',
+                'hero-stats-title': 'Доказанные Результаты',
+                'hero-stats-clients': 'Активные Клиенты',
+                'hero-stats-reduction': 'Сокращение Задач',
+                'hero-stats-response': 'Время Ответа',
+                'hero-stats-satisfaction': 'Удовлетворенность',
+                'services-title': 'Наши Услуги',
+                'services-subtitle': 'Комплексные решения автоматизации, которые трансформируют способ общения вашего бизнеса с клиентами',
+                'service1-title': 'Стратегическое Консультирование',
+                'service1-desc': 'Фаза 0 - Глубокая диагностика вашего бизнеса и персонализированное предложение за 2 часа.',
+                'service1-feature1': '✓ Анализ текущих процессов',
+                'service1-feature2': '✓ Выявление возможностей',
+                'service1-feature3': '✓ Персонализированная дорожная карта',
+                'service1-feature4': '✓ Детальное техническое предложение',
+                'service2-title': 'Многоканальная Автоматизация',
+                'service2-desc': 'WhatsApp, Email, Instagram, Web, Telegram и другие интегрированные каналы.',
+                'service2-price': 'От 299 USD',
+                'service2-feature1': '✓ WhatsApp Business API',
+                'service2-feature2': '✓ Умные чат-боты',
+                'service2-feature3': '✓ Интегрированная CRM',
+                'service2-feature4': '✓ Персонализированные потоки',
+                'service3-title': 'NFC Решения',
+                'service3-desc': 'Карты, стикеры и физический доступ для мероприятий и гостиничного бизнеса.',
+                'service3-price': 'От 99 USD',
+                'service3-feature1': '✓ Персонализированные NFC карты',
+                'service3-feature2': '✓ Динамические QR коды',
+                'service3-feature3': '✓ Автоматическая регистрация',
+                'service3-feature4': '✓ Цифровые меню',
+                'service4-title': 'Исполнительные Панели',
+                'service4-desc': 'Аналитика в реальном времени и персонализированные KPI для вашего бизнеса.',
+                'service4-price': 'От 199 USD',
+                'service4-feature1': '✓ Метрики в реальном времени',
+                'service4-feature2': '✓ Автоматические отчеты',
+                'service4-feature3': '✓ Умные уведомления',
+                'service4-feature4': '✓ Интеграция с CRM',
+                'service5-title': 'Техническая Поддержка',
+                'service5-desc': 'Немедленная техническая поддержка и непрерывное обучение для вашей команды.',
+                'service5-price': 'Включено',
+                'service5-feature1': '✓ Ответ <24ч',
+                'service5-feature2': '✓ Обучение команды',
+                'service5-feature3': '✓ Подробные руководства',
+                'service5-feature4': '✓ Бесплатные обновления',
+                'service6-badge': 'СКОРО',
+                'service6-title': 'Business Bots PRO',
+                'service6-desc': 'Запуск Q4 2025 - Самое продвинутое корпоративное решение на рынке.',
+                'service6-price': 'Корпоративный',
+                'service6-feature1': 'Продвинутый ИИ с машинным обучением',
+                'service6-feature2': 'Неограниченные интеграции (500+ API)',
+                'service6-feature3': 'Приоритетная поддержка 24/7',
+                'service6-feature4': 'Полная white-label настройка',
+                'service6-feature5': 'Продвинутая предиктивная аналитика',
+                'service6-feature6': 'Мульти-арендная архитектура',
+                'service6-waitlist-title': 'Лист Ожидания Открыт',
+                'service6-waitlist-desc': 'Будьте первым с доступом со специальной скидкой',
+                'contact-title': 'Готовы Автоматизировать Ваш Бизнес?',
+                'contact-subtitle': 'Начните с нашей Первичной Консультации за 50 USD',
+                'contact-form-title': 'Запросите Вашу Первичную Консультацию',
+                'contact-form-name': 'Полное Имя',
+                'contact-form-name-placeholder': 'Ваше имя',
+                'contact-form-email': 'Email',
+                'contact-form-email-placeholder': 'ваш@email.com',
+                'contact-form-sector': 'Сектор Вашего Бизнеса',
+                'contact-form-sector-placeholder': 'Выберите ваш сектор',
+                'contact-form-sector-hospitality': 'Гостиничный бизнес',
+                'contact-form-sector-ecommerce': 'Электронная коммерция',
+                'contact-form-sector-education': 'Образование',
+                'contact-form-sector-realestate': 'Недвижимость',
+                'contact-form-sector-services': 'Профессиональные услуги',
+                'contact-form-sector-other': 'Другое',
+                'contact-form-needs': 'Что вы хотите автоматизировать?',
+                'contact-form-needs-placeholder': 'Кратко опишите ваши потребности...',
+                'contact-form-submit': '🚀 Запросить Консультацию - 50 USD',
+                'contact-info-title': 'Прямой Контакт',
+                'contact-info-email': 'Email',
+                'contact-info-location': 'Местоположение',
+                'contact-info-location-value': 'Пальма-де-Майорка, Испания',
+                'footer-desc': 'Интеллектуальная автоматизация и разговорный ИИ из Пальма-де-Майорка.',
+                'footer-legal': 'Основана в 2025 • Соответствует GDPR',
+                'footer-services-title': 'Услуги',
+                'footer-service1': 'Стратегическое Консультирование',
+                'footer-service2': 'Многоканальная Автоматизация',
+                'footer-service3': 'NFC Решения',
+                'footer-service4': 'Исполнительные Панели',
+                'footer-service5': 'Поддержка 24ч',
+                'footer-sectors-title': 'Секторы',
+                'footer-sector1': 'Гостиничный бизнес',
+                'footer-sector2': 'Электронная коммерция',
+                'footer-sector3': 'Образование',
+                'footer-sector4': 'Недвижимость',
+                'footer-sector5': 'Профессиональные услуги',
+                'footer-copyright': '© 2025 Business Bots Solutions. Все права защищены.'
+            },
+            ar: {
+                'nav-services': 'الخدمات',
+                'nav-cases': 'حالات الاستخدام',
+                'nav-results': 'النتائج',
+                'nav-contact': 'اتصل بنا',
+                'hero-title': 'الأتمتة الذكية لأعمالك',
+                'hero-subtitle': 'متخصصون في الذكاء الاصطناعي التحاوري والتدفقات متعددة القنوات والرقمنة الاستراتيجية. من بالما دي مايوركا إلى العالم.',
+                'hero-cta-primary': '🚀 استشارة أولية - 50 دولار',
+                'hero-cta-secondary': '💬 واتساب مباشر',
+                'hero-stats-title': 'نتائج مثبتة',
+                'hero-stats-clients': 'عملاء نشطون',
+                'hero-stats-reduction': 'تقليل المهام',
+                'hero-stats-response': 'وقت الاستجابة',
+                'hero-stats-satisfaction': 'الرضا',
+                'services-title': 'خدماتنا',
+                'services-subtitle': 'حلول أتمتة شاملة تحول طريقة تواصل عملك مع عملائه',
+                'service1-title': 'الاستشارة الاستراتيجية',
+                'service1-desc': 'المرحلة 0 - تشخيص عميق لعملك واقتراح مخصص في ساعتين.',
+                'service1-feature1': '✓ تحليل العمليات الحالية',
+                'service1-feature2': '✓ تحديد الفرص',
+                'service1-feature3': '✓ خارطة طريق مخصصة',
+                'service1-feature4': '✓ اقتراح تقني مفصل',
+                'service2-title': 'الأتمتة متعددة القنوات',
+                'service2-desc': 'واتساب، البريد الإلكتروني، إنستغرام، الويب، تيليغرام والمزيد من القنوات المتكاملة.',
+                'service2-price': 'من 299 دولار',
+                'service2-feature1': '✓ واتساب بيزنس API',
+                'service2-feature2': '✓ روبوتات محادثة ذكية',
+                'service2-feature3': '✓ نظام CRM متكامل',
+                'service2-feature4': '✓ تدفقات مخصصة',
+                'service3-title': 'حلول NFC',
+                'service3-desc': 'بطاقات وملصقات ووصول فيزيائي للفعاليات والضيافة.',
+                'service3-price': 'من 99 دولار',
+                'service3-feature1': '✓ بطاقات NFC مخصصة',
+                'service3-feature2': '✓ أكواد QR ديناميكية',
+                'service3-feature3': '✓ تسجيل دخول تلقائي',
+                'service3-feature4': '✓ قوائم رقمية',
+                'service4-title': 'لوحات المعلومات التنفيذية',
+                'service4-desc': 'تحليلات في الوقت الفعلي ومؤشرات أداء مخصصة لعملك.',
+                'service4-price': 'من 199 دولار',
+                'service4-feature1': '✓ مقاييس في الوقت الفعلي',
+                'service4-feature2': '✓ تقارير تلقائية',
+                'service4-feature3': '✓ تنبيهات ذكية',
+                'service4-feature4': '✓ تكامل مع CRM',
+                'service5-title': 'الدعم التقني',
+                'service5-desc': 'دعم تقني فوري وتدريب مستمر لفريقك.',
+                'service5-price': 'مشمول',
+                'service5-feature1': '✓ استجابة <24 ساعة',
+                'service5-feature2': '✓ تدريب الفريق',
+                'service5-feature3': '✓ أدلة مفصلة',
+                'service5-feature4': '✓ تحديثات مجانية',
+                'service6-badge': 'قريباً',
+                'service6-title': 'Business Bots PRO',
+                'service6-desc': 'إطلاق الربع الرابع 2025 - الحل المؤسسي الأكثر تقدماً في السوق.',
+                'service6-price': 'مؤسسي',
+                'service6-feature1': 'ذكاء اصطناعي متقدم مع التعلم الآلي',
+                'service6-feature2': 'تكاملات غير محدودة (500+ API)',
+                'service6-feature3': 'دعم أولوية 24/7',
+                'service6-feature4': 'تخصيص كامل white-label',
+                'service6-feature5': 'تحليلات تنبؤية متقدمة',
+                'service6-feature6': 'هندسة متعددة المستأجرين',
+                'service6-waitlist-title': 'قائمة الانتظار مفتوحة',
+                'service6-waitlist-desc': 'كن الأول في الوصول مع خصم خاص',
+                'contact-title': 'مستعد لأتمتة عملك؟',
+                'contact-subtitle': 'ابدأ باستشارتنا الأولية مقابل 50 دولار',
+                'contact-form-title': 'اطلب استشارتك الأولية',
+                'contact-form-name': 'الاسم الكامل',
+                'contact-form-name-placeholder': 'اسمك',
+                'contact-form-email': 'البريد الإلكتروني',
+                'contact-form-email-placeholder': 'your@email.com',
+                'contact-form-sector': 'قطاع عملك',
+                'contact-form-sector-placeholder': 'اختر قطاعك',
+                'contact-form-sector-hospitality': 'الضيافة',
+                'contact-form-sector-ecommerce': 'التجارة الإلكترونية',
+                'contact-form-sector-education': 'التعليم',
+                'contact-form-sector-realestate': 'العقارات',
+                'contact-form-sector-services': 'الخدمات المهنية',
+                'contact-form-sector-other': 'أخرى',
+                'contact-form-needs': 'ماذا تريد أن تؤتمت؟',
+                'contact-form-needs-placeholder': 'صف احتياجاتك بإيجاز...',
+                'contact-form-submit': '🚀 طلب استشارة - 50 دولار',
+                'contact-info-title': 'اتصال مباشر',
+                'contact-info-email': 'البريد الإلكتروني',
+                'contact-info-location': 'الموقع',
+                'contact-info-location-value': 'بالما دي مايوركا، إسبانيا',
+                'footer-desc': 'الأتمتة الذكية والذكاء الاصطناعي التحاوري من بالما دي مايوركا.',
+                'footer-legal': 'تأسست في 2025 • متوافق مع GDPR',
+                'footer-services-title': 'الخدمات',
+                'footer-service1': 'الاستشارة الاستراتيجية',
+                'footer-service2': 'الأتمتة متعددة القنوات',
+                'footer-service3': 'حلول NFC',
+                'footer-service4': 'لوحات المعلومات التنفيذية',
+                'footer-service5': 'دعم 24 ساعة',
+                'footer-sectors-title': 'القطاعات',
+                'footer-sector1': 'الضيافة',
+                'footer-sector2': 'التجارة الإلكترونية',
+                'footer-sector3': 'التعليم',
+                'footer-sector4': 'العقارات',
+                'footer-sector5': 'الخدمات المهنية',
+                'footer-copyright': '© 2025 Business Bots Solutions. جميع الحقوق محفوظة.'
+            }
+        };
+
+        let currentLang = 'es';
+
+        // Language switching functionality
+        function switchLanguage(lang) {
+            currentLang = lang;
+            
+            // Update HTML attributes
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            
+            // Update current language display
+            const flags = {
+                'es': '🇪🇸',
+                'en': '🇬🇧',
+                'fr': '🇫🇷',
+                'de': '🇩🇪',
+                'it': '🇮🇹',
+                'ru': '🇷🇺',
+                'ar': '🇸🇦'
+            };
+            
+            document.getElementById('current-flag').textContent = flags[lang];
+            document.getElementById('current-lang').textContent = lang.toUpperCase();
+            
+            // Update all translatable elements
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // Update placeholders
+            const placeholderElements = document.querySelectorAll('[data-translate-placeholder]');
+            placeholderElements.forEach(element => {
+                const key = element.getAttribute('data-translate-placeholder');
+                if (translations[lang] && translations[lang][key]) {
+                    element.placeholder = translations[lang][key];
+                }
+            });
+            
+            // Update select options
+            const selectOptions = document.querySelectorAll('option[data-translate]');
+            selectOptions.forEach(option => {
+                const key = option.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    option.textContent = translations[lang][key];
+                }
+            });
+            
+            // Close dropdowns
+            const langDropdown = document.getElementById('language-dropdown');
+            const mobileLangDropdown = document.getElementById('mobile-language-dropdown');
+            if (langDropdown) langDropdown.style.display = 'none';
+            if (mobileLangDropdown) mobileLangDropdown.style.display = 'none';
+        }
+
+        // Enhanced Language dropdown functionality
+        function setupLanguageDropdowns() {
+            // Desktop language dropdown
+            const langBtn = document.getElementById('language-btn');
+            const langDropdown = document.getElementById('language-dropdown');
+            const langArrow = document.getElementById('lang-arrow');
+            
+            // Mobile language dropdown
+            const mobileLangBtn = document.getElementById('mobile-language-btn');
+            const mobileLangDropdown = document.getElementById('mobile-language-dropdown');
+            
+            if (langBtn && langDropdown) {
+                langBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    
+                    if (langDropdown.style.display === 'block') {
+                        langDropdown.style.display = 'none';
+                        if (langArrow) langArrow.style.transform = 'rotate(0deg)';
+                    } else {
+                        langDropdown.style.display = 'block';
+                        if (langArrow) langArrow.style.transform = 'rotate(180deg)';
+                    }
+                });
+            }
+            
+            if (mobileLangBtn && mobileLangDropdown) {
+                mobileLangBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    
+                    if (mobileLangDropdown.style.display === 'block') {
+                        mobileLangDropdown.style.display = 'none';
+                    } else {
+                        mobileLangDropdown.style.display = 'block';
+                    }
+                });
+            }
+
+            // Language option selection for both dropdowns
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lang = this.getAttribute('data-lang');
+                    switchLanguage(lang);
+                });
+            });
+
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function() {
+                if (langDropdown) {
+                    langDropdown.style.display = 'none';
+                    if (langArrow) langArrow.style.transform = 'rotate(0deg)';
+                }
+                if (mobileLangDropdown) {
+                    mobileLangDropdown.style.display = 'none';
+                }
+            });
+        }
+
+        // Mobile menu functionality
+        function setupMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                // Initially hide mobile menu
+                mobileMenu.style.display = 'none';
+                
+                mobileMenuBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    if (mobileMenu.style.display === 'none') {
+                        mobileMenu.style.display = 'block';
+                        // Animate hamburger to X
+                        const icon = this.querySelector('svg');
+                        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+                    } else {
+                        mobileMenu.style.display = 'none';
+                        // Animate X to hamburger
+                        const icon = this.querySelector('svg');
+                        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+                    }
+                });
+                
+                // Close mobile menu when clicking on links
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.style.display = 'none';
+                        const icon = mobileMenuBtn.querySelector('svg');
+                        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+                    });
+                });
+            }
+        }
+
+        // Intersection Observer for animations
+        function setupScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all fade-in elements
+            document.querySelectorAll('.animate-fade-in, .animate-slide-in').forEach(el => {
+                el.classList.add('fade-in-up');
+                observer.observe(el);
+            });
+        }
+
+        // Performance optimized scroll handler
+        let ticking = false;
+        function updateNavOnScroll() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-opacity-98', 'backdrop-blur-md');
+                nav.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+            } else {
+                nav.classList.remove('bg-opacity-98', 'backdrop-blur-md');
+                nav.style.boxShadow = 'none';
+            }
+            ticking = false;
+        }
+
+        function requestScrollUpdate() {
+            if (!ticking) {
+                requestAnimationFrame(updateNavOnScroll);
+                ticking = true;
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Contact form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const button = this.querySelector('button[type="submit"]');
+            const originalText = button.textContent;
+            
+            button.textContent = '⏳ Procesando...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                button.textContent = '✅ ¡Solicitud Enviada!';
+                button.className = 'w-full bg-green-500 text-white px-8 py-4 rounded-lg font-semibold';
+                
+                setTimeout(() => {
+                    // Get WhatsApp messages by language
+                    const whatsappMessages = {
+                        'es': 'Hola! Me interesa la Consulta Inicial de 50 USD para automatizar mi negocio.',
+                        'en': 'Hello! I\'m interested in the Initial Consultation for 50 USD to automate my business.',
+                        'fr': 'Bonjour! Je suis intéressé par la Consultation Initiale de 50 USD pour automatiser mon entreprise.',
+                        'de': 'Hallo! Ich interessiere mich für die Erstberatung für 50 USD zur Automatisierung meines Unternehmens.',
+                        'it': 'Ciao! Sono interessato alla Consulenza Iniziale di 50 USD per automatizzare la mia azienda.',
+                        'ru': 'Привет! Меня интересует Первичная Консультация за 50 USD для автоматизации моего бизнеса.',
+                        'ar': 'مرحبا! أنا مهتم بالاستشارة الأولية مقابل 50 دولار لأتمتة عملي.'
+                    };
+                    
+                    const message = whatsappMessages[currentLang] || whatsappMessages['es'];
+                    window.open(`https://wa.me/34644075065?text=${encodeURIComponent(message)}`, '_blank');
+                }, 1500);
+            }, 2000);
+        });
+
+        // Start consultation function
+        function startConsultation() {
+            const whatsappMessages = {
+                'es': '¡Hola! Me interesa la Consulta Inicial de 50 USD. ¿Podemos agendar una sesión de 2 horas para analizar mi negocio?',
+                'en': 'Hello! I\'m interested in the Initial Consultation for 50 USD. Can we schedule a 2-hour session to analyze my business?',
+                'fr': 'Bonjour! Je suis intéressé par la Consultation Initiale de 50 USD. Pouvons-nous programmer une session de 2 heures pour analyser mon entreprise?',
+                'de': 'Hallo! Ich interessiere mich für die Erstberatung für 50 USD. Können wir eine 2-stündige Sitzung zur Analyse meines Unternehmens vereinbaren?',
+                'it': 'Ciao! Sono interessato alla Consulenza Iniziale di 50 USD. Possiamo programmare una sessione di 2 ore per analizzare la mia azienda?',
+                'ru': 'Привет! Меня интересует Первичная Консультация за 50 USD. Можем ли мы запланировать 2-часовую сессию для анализа моего бизнеса?',
+                'ar': 'مرحبا! أنا مهتم بالاستشارة الأولية مقابل 50 دولار. هل يمكننا جدولة جلسة لمدة ساعتين لتحليل عملي؟'
+            };
+            
+            const message = whatsappMessages[currentLang] || whatsappMessages['es'];
+            window.open(`https://wa.me/34644075065?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // Make function globally available
+        window.startConsultation = startConsultation;
+
+        // Animate stats counters on scroll
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stats-counter');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.textContent.replace(/\D/g, '')) || 50;
+                        let current = 0;
+                        const increment = target / 50;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                counter.textContent = counter.textContent.replace(/\d+/, target);
+                                clearInterval(timer);
+                            } else {
+                                counter.textContent = counter.textContent.replace(/\d+/, Math.floor(current));
+                            }
+                        }, 40);
+                        observer.unobserve(counter);
+                    }
+                });
+            });
+
+            counters.forEach(counter => observer.observe(counter));
+        }
+
+        // Enhanced initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize all functionality
+            setupLanguageDropdowns();
+            setupMobileMenu();
+            setupScrollAnimations();
+            animateCounters();
+            
+            // Update mobile language selectors
+            function updateMobileLanguageDisplay(lang) {
+                const flags = {
+                    'es': '🇪🇸',
+                    'en': '🇬🇧',
+                    'fr': '🇫🇷',
+                    'de': '🇩🇪',
+                    'it': '🇮🇹',
+                    'ru': '🇷🇺',
+                    'ar': '🇸🇦'
+                };
+                
+                const mobileFlag = document.getElementById('mobile-current-flag');
+                const mobileLang = document.getElementById('mobile-current-lang');
+                
+                if (mobileFlag && mobileLang) {
+                    mobileFlag.textContent = flags[lang];
+                    mobileLang.textContent = lang.toUpperCase();
+                }
+            }
+            
+            // Override switchLanguage to update mobile displays
+            const originalSwitchLanguage = switchLanguage;
+            switchLanguage = function(lang) {
+                originalSwitchLanguage(lang);
+                updateMobileLanguageDisplay(lang);
+            };
+            
+            // Add loading states to buttons
+            document.querySelectorAll('button, .btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (!this.classList.contains('loading')) {
+                        this.classList.add('loading');
+                        setTimeout(() => {
+                            this.classList.remove('loading');
+                        }, 2000);
+                    }
+                });
+            });
+            
+            // Lazy loading for images (if any are added later)
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            img.classList.remove('lazy');
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('img[data-src]').forEach(img => {
+                    imageObserver.observe(img);
+                });
+            }
+            
+            // Preload critical resources
+            const preloadLink = document.createElement('link');
+            preloadLink.rel = 'preload';
+            preloadLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap';
+            preloadLink.as = 'style';
+            document.head.appendChild(preloadLink);
+        });
+
+        // Optimized scroll handler
+        window.addEventListener('scroll', requestScrollUpdate, { passive: true });
+        
+        // Handle resize events
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(function() {
+                // Recalculate layouts if needed
+                setupScrollAnimations();
+            }, 250);
+        });
+        
+        // Service Worker registration for better performance (optional)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                // Uncomment if you want to add a service worker
+                // navigator.serviceWorker.register('/sw.js');
+            });
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'972cdd28314c00b2',t:'MTc1NTgwNzk3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
